@@ -1,0 +1,15 @@
+**/Intermediates
+**/Binaries
+**/Build
+*.log
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
+*.vs
+*.idea
+*.dll
+*.exe
+*.sln
+*.csproj
+*.user
+*.hdr
