@@ -1,7 +1,5 @@
 #include "pch.h"
 
-#include "include/glad/glad.h"
-
 #include "rendering/window/window.h"
 
 namespace rendering
@@ -25,7 +23,7 @@ namespace rendering
 		m_window_specification.v_sync = use_vsync;
 	}
 
-	void* window::get_native_window() const
+	GLFWwindow* window::get_native_window() const
 	{
 		return m_window_handle;
 	}
@@ -55,13 +53,6 @@ namespace rendering
 
 		// Handle Initial VSync.
 		set_vsync_enabled(true);
-
-		// Make current
-		glfwMakeContextCurrent(m_window_handle);
-
-		// Glad initialize
-		if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))
-			return false;
 
 		return true;
 	}

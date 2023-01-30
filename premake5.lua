@@ -16,6 +16,7 @@ IncludeDir = {}
 IncludeDir["ImGui"] =  "%{wks.location}/ThirdParty/ImGui"
 IncludeDir["Glfw"] =  "%{wks.location}/ThirdParty/Glfw"
 IncludeDir["Glad"] =  "%{wks.location}/ThirdParty/Glad"
+IncludeDir["Glm"] =  "%{wks.location}/ThirdParty/Glm"
 
 group "Dependencies"
     include "ThirdParty/Glfw"
@@ -45,6 +46,7 @@ project "Core"
     "%{wks.location}/Core/Source",
     "%{IncludeDir.Glfw}",
     "%{IncludeDir.Glad}",
+    "%{IncludeDir.Glm}",
     "%{IncludeDir.ImGui}",
   }
 

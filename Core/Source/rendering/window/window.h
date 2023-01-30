@@ -28,7 +28,7 @@ namespace rendering
 
 		void set_vsync_enabled(bool use_vsync);
 
-		void* get_native_window() const;
+		GLFWwindow* get_native_window() const;
 		window_specification& get_window_specification() { return m_window_specification; };
 
 		static unique<window> create(const window_specification& specification);

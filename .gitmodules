@@ -8,3 +8,6 @@
 [submodule "ThirdParty/Glad"]
 	path = ThirdParty/Glad
 	url = https://github.com/Dav1dde/glad
+[submodule "ThirdParty/Glm"]
+	path = ThirdParty/Glm
+	url = https://github.com/g-truc/glm.git
