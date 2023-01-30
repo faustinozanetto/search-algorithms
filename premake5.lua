@@ -13,6 +13,12 @@ flags {
 outputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
+IncludeDir["ImGui"] =  "%{wks.location}/ThirdParty/ImGui"
+
+group "Dependencies"
+    include "ThirdParty/ImGui"
+group ""
+
 
 project "Core"
   location "Core"
@@ -26,6 +32,14 @@ project "Core"
   files {
     "%{wks.location}/Core/Source/**.h",
     "%{wks.location}/Core/Source/**.cpp",
+  }
+
+  includedirs {
+    "%{IncludeDir.ImGui}",
+  }
+
+  links {
+    "ImGui"
   }
 
   filter "system:windows"
