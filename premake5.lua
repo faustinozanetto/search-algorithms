@@ -14,8 +14,12 @@ outputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["ImGui"] =  "%{wks.location}/ThirdParty/ImGui"
+IncludeDir["Glfw"] =  "%{wks.location}/ThirdParty/Glfw"
+IncludeDir["Glad"] =  "%{wks.location}/ThirdParty/Glad"
 
 group "Dependencies"
+    include "ThirdParty/Glfw"
+    include "ThirdParty/Glad"
     include "ThirdParty/ImGui"
 group ""
 
@@ -29,17 +33,25 @@ project "Core"
   targetdir("Binaries/" .. outputDir .. "/%{prj.name}")
   objdir("Intermediates/" .. outputDir .. "/%{prj.name}")
 
+  pchheader "pch.h"
+  pchsource "Core/Source/pch.cpp"
+
   files {
     "%{wks.location}/Core/Source/**.h",
     "%{wks.location}/Core/Source/**.cpp",
   }
 
   includedirs {
+    "%{wks.location}/Core/Source",
+    "%{IncludeDir.Glfw}",
+    "%{IncludeDir.Glad}",
     "%{IncludeDir.ImGui}",
   }
 
   links {
-    "ImGui"
+    "ImGui",
+    "Glfw",
+    "Glad",
   }
 
   filter "system:windows"

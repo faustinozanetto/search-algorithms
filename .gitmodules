@@ -2,3 +2,9 @@
 	path = ThirdParty/ImGui
 	url = https://github.com/ocornut/imgui
 	branch = docking
+[submodule "ThirdParty/Glfw"]
+	path = ThirdParty/Glfw
+	url = https://github.com/glfw/glfw
+[submodule "ThirdParty/Glad"]
+	path = ThirdParty/Glad
+	url = https://github.com/Dav1dde/glad
