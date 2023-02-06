@@ -14,8 +14,8 @@ outputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["ImGui"] =  "%{wks.location}/ThirdParty/ImGui"
-IncludeDir["Glfw"] =  "%{wks.location}/ThirdParty/Glfw"
-IncludeDir["Glad"] =  "%{wks.location}/ThirdParty/Glad"
+IncludeDir["Glfw"] =  "%{wks.location}/ThirdParty/Glfw/include"
+IncludeDir["Glad"] =  "%{wks.location}/ThirdParty/Glad/include"
 IncludeDir["Glm"] =  "%{wks.location}/ThirdParty/Glm"
 
 group "Dependencies"
@@ -61,9 +61,9 @@ project "Core"
     systemversion "latest"
 
   filter "configurations:Debug"
-    defines { "WIN32_LEAN_AND_MEAN" }
+    defines { "WIN32_LEAN_AND_MEAN", "GLFW_INCLUDE_NONE" }
     symbols "on"
 
   filter "configurations:Release"
-    defines {  "WIN32_LEAN_AND_MEAN" }
+    defines {  "WIN32_LEAN_AND_MEAN", "GLFW_INCLUDE_NONE" }
     optimize "on"

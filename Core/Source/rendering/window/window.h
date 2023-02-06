@@ -1,8 +1,6 @@
 #pragma once
 
-#include "iostream"
-
-#include "include/glfw/glfw3.h"
+#include "glfw/glfw3.h"
 
 namespace rendering
 {
@@ -27,14 +25,13 @@ namespace rendering
 		~window();
 
 		void set_vsync_enabled(bool use_vsync);
+		void setup_callbacks();
+		bool initialize_window();
 
 		GLFWwindow* get_native_window() const;
 		window_specification& get_window_specification() { return m_window_specification; };
 
 		static unique<window> create(const window_specification& specification);
-
-	private:
-		bool initialize_window();
 
 	protected:
 		window_specification m_window_specification;

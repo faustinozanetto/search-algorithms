@@ -1,7 +1,10 @@
 #pragma once
 
-#include <include/glad/glad.h>
+#include <glm/glm.hpp>
 #include <map>
+
+#include <glad/glad.h>
+#include <glfw/glfw3.h>
 
 #include "rendering/graphics_object.h"
 
@@ -17,9 +20,9 @@ namespace rendering {
 
 		shader_specification() = default;
 
-		shader_specification(const std::string& vertex_path,
-			const std::string& fragment_path)
-			: vertex_path(vertex_path), fragment_path(fragment_path) {}
+		shader_specification(std::string vertex_path,
+			std::string fragment_path)
+			: vertex_path(std::move(vertex_path)), fragment_path(std::move(fragment_path)) {}
 	};
 
 	class shader : public graphics_object {
@@ -31,6 +34,7 @@ namespace rendering {
 		void un_bind() override;
 
 		void set_int(const std::string& uniform, int value);
+		void set_mat4(const std::string& uniform, const glm::mat4& value);
 
 		unsigned int get_uniform_location(const std::string& uniform);
 

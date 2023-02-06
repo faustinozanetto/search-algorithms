@@ -1,27 +1,14 @@
 #include "pch.h"
 
-#include <iostream>
-#include "rendering/shader/shader.h"
-#include <rendering/window/window.h>
-#include <rendering/renderer/renderer.h>
+#include "core/search_algorithms.h"
 
 int main()
 {
-	std::cout << "Hello World" << std::endl;
-	unique<rendering::window> window = rendering::window::create({});
-	unique<rendering::renderer> renderer = rendering::renderer::create({ window->get_native_window() });
-	renderer->initialize();
-
-	shared<rendering::shader> shader = rendering::shader::create({ "Assets/Shaders/test.vert", "Assets/Shaders/test.frag" });
-	std::cout << shader->get_object_handle() << std::endl;
-
-	while (!renderer->should_close())
-	{
-		renderer->clear_screen();
-		renderer->set_clear_color({ 0.25, 0.35, 0.45, 1.0 });
-		renderer->swap_buffers();
-		renderer->poll_input();
-	}
-
+	const core::search_algorithms_specification& search_algorithms_specification = {
+		{"Search Algorithms", 1000,1000, true},
+		{glm::uvec2(50, 50), 3}
+	};
+	const unique<core::search_algorithms>& search_algorithms = create_unique<core::search_algorithms>(search_algorithms_specification);
+	search_algorithms->run();
 	return 0;
 }

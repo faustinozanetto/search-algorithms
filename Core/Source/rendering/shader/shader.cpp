@@ -1,10 +1,12 @@
 #include "pch.h"
 
 #include "rendering/shader/shader.h"
+#include <glm/gtc/type_ptr.hpp>
 
 namespace rendering {
 	shader::shader(const shader_specification& specification) {
 		m_shader_specification = specification;
+		std::cout << "Loading shader" << std::endl;
 		// Parse both vertex and fragment shaders sources from file.
 		const std::string& vertexSource =
 			parse_shader_contents_from_file(specification.vertex_path);
@@ -23,6 +25,11 @@ namespace rendering {
 
 	void shader::set_int(const std::string& uniform, int value) {
 		glUniform1i(get_uniform_location(uniform), value);
+	}
+
+	void shader::set_mat4(const std::string& uniform, const glm::mat4& value)
+	{
+		glUniformMatrix4fv(get_uniform_location(uniform), 1, GL_FALSE, glm::value_ptr(value));
 	}
 
 	unsigned int shader::get_uniform_location(const std::string& uniform) {
@@ -109,6 +116,7 @@ namespace rendering {
 				// logger::error(
 				//	"open_gl_shader::compile_shader | Shader compilation failed: " +
 				// std::string( 		infoLog.begin(), infoLog.end()));
+				std::cout << "compile_shader | Shader compilation failed: " + std::string(infoLog.begin(), infoLog.end()) << std::endl;
 				break;
 			}
 
@@ -145,6 +153,8 @@ namespace rendering {
 				glDeleteShader(id);
 			}
 
+			std::cout << "compile_shader | Shader linking failed: " + std::string(infoLog.begin(), infoLog.end()) << std::endl;
+
 			// Print error log.
 			// logger::error(
 			//"open_gl_shader::compile_shader | Shader linking failed: " +
@@ -154,6 +164,7 @@ namespace rendering {
 
 		// logger::info("open_gl_shader::compile_shader | Shader Compiled
 		// Successfully!");
+		std::cout << "Shader compiled successfully!" << std::endl;
 
 		// Cleanup.
 		for (const auto id : glShaderIDs) {

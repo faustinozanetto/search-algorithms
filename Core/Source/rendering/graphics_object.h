@@ -3,7 +3,7 @@
 namespace rendering {
 class graphics_object {
 public:
-  ~graphics_object() = default;
+  virtual ~graphics_object() = default;
 
   virtual void bind() = 0;
   virtual void un_bind() = 0;
